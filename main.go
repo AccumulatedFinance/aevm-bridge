@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 	"time"
 
+	"github.com/ethereum/go-ethereum/common"
 	log "github.com/sirupsen/logrus"
 
 	"github.com/AccumulatedFinance/aevm-bridge/config"
@@ -147,7 +148,13 @@ func getBridge(p config.Bridge, die chan bool) {
 			if len(evmEvents) > 0 {
 				for _, event := range evmEvents {
 					log.Info("Minting ", event.Amount, " of token=", p.RebaseToken, " to ", event.Receiver)
-
+					legacyTx, signature, err := client.GenerateAndSignERC20Mint(common.HexToAddress(p.RebaseToken), common.HexToAddress(event.Receiver), event.Amount)
+					if err != nil {
+						log.Error(err)
+					}
+					tx := client.PrepareTx(legacyTx)
+					txhash, err := client.SubmitTx(tx, signature)
+					log.Info("Tx sent: ", txhash.Hex())
 				}
 			}
 
