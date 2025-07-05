@@ -111,6 +111,12 @@ func getBridge(p config.Bridge, die chan bool) {
 		return
 	}
 
+	aevmClient, err := store.EVM.GetClientByChainId(619001)
+	if err != nil {
+		log.WithField("prefix", "main").Error(err)
+		return
+	}
+
 	for {
 
 		select {
@@ -148,12 +154,12 @@ func getBridge(p config.Bridge, die chan bool) {
 			if len(evmEvents) > 0 {
 				for _, event := range evmEvents {
 					log.Info("Minting ", event.Amount, " of token=", p.RebaseToken, " to ", event.Receiver)
-					legacyTx, signature, err := client.GenerateAndSignERC20Mint(common.HexToAddress(p.RebaseToken), common.HexToAddress(event.Receiver), event.Amount)
+					legacyTx, signature, err := aevmClient.GenerateAndSignERC20Mint(common.HexToAddress(p.RebaseToken), common.HexToAddress(event.Receiver), event.Amount)
 					if err != nil {
 						log.Error(err)
 					}
-					tx := client.PrepareTx(legacyTx)
-					txhash, err := client.SubmitTx(tx, signature)
+					tx := aevmClient.PrepareTx(legacyTx)
+					txhash, err := aevmClient.SubmitTx(tx, signature)
 					log.Info("Tx sent: ", txhash.Hex())
 				}
 			}

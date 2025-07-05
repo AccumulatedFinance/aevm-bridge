@@ -25,7 +25,7 @@ type EVMNetwork struct {
 	ChainID   int             `required:"true" yaml:"chainID" json:"chainID" form:"chainID" query:"chainID"`
 	Endpoint  string          `required:"true" yaml:"endpoint" json:"endpoint" form:"endpoint" query:"endpoint"`
 	Coin      *EVMNetworkCoin `yaml:"coin" json:"coin" form:"coin" query:"coin"`
-	TxType    int             `yaml:"txType" json:"txType" form:"txType" query:"txType"`                           // default 0, for Ethereum will be 1
+	TxType    int             `default:"1" yaml:"txType" json:"txType" form:"txType" query:"txType"`               // default 0, for Ethereum will be 1
 	GasLimit  int64           `default:"5000000" yaml:"gasLimit" json:"gasLimit" form:"gasLimit" query:"gasLimit"` // default 50000000 for all chains, rewrite if needed
 	GasFeeCap float64         `yaml:"gasFeeCap" json:"gasFeeCap" form:"gasFeeCap" query:"gasFeeCap"`               // parse from blockchain by default
 	GasTipCap float64         `default:"0.1" yaml:"gasTipCap" json:"gasTipCap" form:"gasTipCap" query:"gasTipCap"` // default 0.1 for Ethereum, not used on most other chains
