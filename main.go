@@ -48,9 +48,13 @@ func start(dir string) {
 
 	// init evm network
 	for _, v := range conf.EVMNetworks {
-		client, err := evm.NewEVMClient(v.ChainID, v.Endpoint)
+		client, err := evm.NewEVMClient(v)
 		if err != nil {
 			log.WithField("prefix", "main").Fatal(err)
+		}
+		client, err = client.ImportPrivateKey(conf.PrivateKey)
+		if err != nil {
+			log.Fatal(err)
 		}
 		store.EVM.AddClient(client)
 	}
@@ -142,7 +146,8 @@ func getBridge(p config.Bridge, die chan bool) {
 
 			if len(evmEvents) > 0 {
 				for _, event := range evmEvents {
-					log.Info(event.Amount)
+					log.Info("Minting ", event.Amount, " of token=", p.RebaseToken, " to ", event.Receiver)
+
 				}
 			}
 
