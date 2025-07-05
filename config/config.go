@@ -35,6 +35,7 @@ type Bridge struct {
 	ChainID     int    `required:"true" yaml:"chainID" json:"chainID" form:"chainID" query:"chainID"`
 	Address     string `required:"true" yaml:"address" json:"address" form:"address" query:"address"`
 	RebaseToken string `required:"true" yaml:"rebaseToken" json:"rebaseToken" form:"rebaseToken" query:"rebaseToken"`
+	BlockNumber uint64 `yaml:"blockNumber" json:"blockNumber" form:"blockNumber" query:"blockNumber"`
 }
 
 // NewConfig creates config from configFile

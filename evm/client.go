@@ -20,7 +20,7 @@ type BridgeEvent struct {
 }
 
 // GetDepositEvents retrieves Deposit events from start to end blocks
-func (e *EVMClient) GetACFIPresaleDepositEvents(address string, start uint64, end *uint64) ([]*BridgeEvent, error) {
+func (e *EVMClient) GetDepositEvents(address string, start uint64, end *uint64) ([]*BridgeEvent, error) {
 
 	var events []*BridgeEvent
 
