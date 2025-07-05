@@ -9,6 +9,7 @@ import (
 	log "github.com/sirupsen/logrus"
 
 	"github.com/AccumulatedFinance/aevm-bridge/config"
+	"github.com/AccumulatedFinance/aevm-bridge/store"
 )
 
 const CACHE_FILE = "cache.gob"
@@ -33,7 +34,6 @@ func start(dir string) {
 
 	var err error
 	var conf *config.Config
-	var lvl log.Level
 
 	// load config
 	if conf, err = config.NewConfig(dir); err != nil {
