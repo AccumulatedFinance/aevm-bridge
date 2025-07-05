@@ -9,7 +9,7 @@ import (
 )
 
 const EVM_CLIENT_DELAY = 100 * time.Millisecond
-const EVM_EVENTS_LIMIT = 100
+const EVM_EVENTS_LIMIT = 29
 const ETH_ZERO_ADDRESS = "0x0000000000000000000000000000000000000000"
 const ETH_ETHER_ADDRESS = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
 const ETH_ETHER_ADDRESS_MIXED = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"

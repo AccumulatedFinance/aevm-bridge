@@ -74,6 +74,8 @@ func start(dir string) {
 		}
 	}()
 
+	select {}
+
 }
 
 // getBridge parses presale deposit events
